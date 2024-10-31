@@ -6,7 +6,7 @@
 /*   By: vszpiech <vszpiech@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 16:03:19 by vszpiech          #+#    #+#             */
-/*   Updated: 2024/10/31 16:03:21 by vszpiech         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:11:53 by vszpiech         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int send_bit(pid_t server_pid, int bit)
         signal = SIGUSR2;
     if (kill(server_pid, signal) == -1)
         return -1;
-    // Introduce a small delay to prevent signal loss
     usleep(100);
     return 0;
 }
@@ -54,7 +53,6 @@ int send_message(pid_t server_pid, const char *message)
             return -1;
         i++;
     }
-    // Send null terminator to indicate end of message
     if (send_char(server_pid, '\0') == -1)
         return -1;
     return 0;
